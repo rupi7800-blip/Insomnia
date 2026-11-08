@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Insomnia — dormire meglio</title>
+<meta name="description" content="Insomnia: tecniche, suoni rilassanti, tisane, esercizi e consigli per combattere l'insonnia.">
+<meta name="theme-color" content="#0b1026">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{
+  --bg:#0b1026; --bg2:#121a3a; --card:#18224a; --card2:#1f2b5c;
+  --txt:#e8eaf6; --mut:#9aa3c7; --acc:#9fa8ff; --acc2:#ffd38a; --ok:#7fd8b5; --warn:#ffb38a;
+  --r:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.5}
+body{min-height:100vh;padding-bottom:calc(76px + env(safe-area-inset-bottom));
+  background:radial-gradient(ellipse at 50% -10%,#26306a 0%,var(--bg) 60%) fixed}
+body.notte{filter:sepia(1) hue-rotate(-40deg) saturate(2.2) brightness(.55)}
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.6}
+header{position:sticky;top:0;z-index:10;padding:14px 18px 10px;padding-top:calc(14px + env(safe-area-inset-top));
+  background:linear-gradient(var(--bg) 70%,transparent);display:flex;align-items:center;gap:10px}
+header h1{font-size:1.35rem;font-weight:700;letter-spacing:.5px;flex:1}
+header h1 span{color:var(--acc2)}
+.icon-btn{background:var(--card);border:1px solid #2c3870;color:var(--txt);border-radius:12px;padding:8px 11px;font-size:1rem;cursor:pointer}
+main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:0 16px}
+section.view{display:none;animation:fade .35s}
+section.view.on{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:1.25rem;margin:8px 0 4px}
+h3{font-size:1.02rem;margin:14px 0 6px;color:var(--acc)}
+p.lead{color:var(--mut);font-size:.93rem;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.tile{background:var(--card);border:1px solid #27326a;border-radius:var(--r);padding:16px 14px;cursor:pointer;text-align:left;color:var(--txt);font:inherit}
+.tile b{display:block;font-size:1rem;margin-top:6px}
+.tile small{color:var(--mut);font-size:.8rem}
+.tile .em{font-size:1.6rem}
+.card{background:var(--card);border:1px solid #27326a;border-radius:var(--r);padding:16px;margin-bottom:12px}
+.hero{background:linear-gradient(135deg,#2a3577,#1a2350);border-radius:var(--r);padding:18px;margin:6px 0 16px}
+.hero .q{font-size:1.05rem;font-style:italic}
+.hero .who{color:var(--mut);font-size:.82rem;margin-top:6px}
+details{background:var(--card);border:1px solid #27326a;border-radius:var(--r);margin-bottom:10px;overflow:hidden}
+summary{list-style:none;padding:14px 16px;cursor:pointer;font-weight:600;display:flex;gap:10px;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";margin-left:auto;color:var(--acc);font-weight:400}
+details[open] summary::after{content:"－"}
+summary .tag{font-size:.7rem;font-weight:500;background:#2b376f;color:var(--acc);padding:2px 8px;border-radius:20px;white-space:nowrap}
+.body{padding:0 16px 16px;color:#d5d9ef;font-size:.94rem}
+.body ol,.body ul{padding-left:20px;margin:6px 0}
+.body li{margin:4px 0}
+.body .note{background:#22306a;border-left:3px solid var(--acc2);padding:8px 10px;border-radius:8px;margin-top:10px;font-size:.86rem;color:#e6dcc4}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 12px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;background:var(--card);border:1px solid #2c3870;color:var(--mut);padding:7px 14px;border-radius:20px;font:inherit;font-size:.86rem;cursor:pointer}
+.chip.on{background:var(--acc);color:#0b1026;border-color:var(--acc);font-weight:600}
+nav.bottom{position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(11,16,38,.96);backdrop-filter:blur(8px);
+  border-top:1px solid #222c5c;display:flex;justify-content:space-around;padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+nav.bottom button{background:none;border:0;color:var(--mut);font:inherit;font-size:.68rem;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 6px;cursor:pointer;min-width:52px}
+nav.bottom button .i{font-size:1.25rem;filter:grayscale(.6)}
+nav.bottom button.on{color:var(--acc2)}
+nav.bottom button.on .i{filter:none}
+/* respiro */
+.breath-wrap{display:flex;flex-direction:column;align-items:center;padding:10px 0}
+.orb{width:210px;height:210px;border-radius:50%;margin:18px auto;display:flex;align-items:center;justify-content:center;flex-direction:column;
+  background:radial-gradient(circle at 40% 35%,#b8bfff,#5a63c9 60%,#2a3277);box-shadow:0 0 60px #5a63c955;transform:scale(.55);transition:transform 4s ease-in-out}
+.orb .ph{font-size:1.3rem;font-weight:700;color:#0b1026}
+.orb .ct{font-size:2rem;font-weight:800;color:#0b1026}
+.btn{background:var(--acc);color:#0b1026;border:0;border-radius:12px;padding:11px 18px;font:inherit;font-weight:700;cursor:pointer}
+.btn.sec{background:var(--card2);color:var(--txt);border:1px solid #33407c}
+.btn.sm{padding:7px 12px;font-size:.85rem}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+select,input,textarea{background:var(--bg2);color:var(--txt);border:1px solid #33407c;border-radius:10px;padding:9px 10px;font:inherit;width:100%}
+textarea{min-height:110px;resize:vertical}
+label{font-size:.85rem;color:var(--mut);display:block;margin:8px 0 4px}
+/* suoni */
+.snd{display:flex;align-items:center;gap:12px;background:var(--card);border:1px solid #27326a;border-radius:var(--r);padding:12px 14px;margin-bottom:10px}
+.snd .em{font-size:1.6rem}
+.snd .info{flex:1;min-width:0}
+.snd .info b{display:block}
+.snd .info small{color:var(--mut);font-size:.78rem}
+.snd input[type=range]{margin-top:6px;accent-color:var(--acc);padding:0;border:0;background:none}
+.tog{width:46px;height:46px;border-radius:50%;border:0;background:var(--card2);color:var(--txt);font-size:1.1rem;cursor:pointer;flex:none}
+.tog.on{background:var(--acc2);color:#0b1026}
+.timerbar{position:sticky;top:64px;z-index:5;background:var(--card2);border-radius:var(--r);padding:12px 14px;margin-bottom:12px;border:1px solid #33407c}
+.stat{display:flex;gap:10px;margin:10px 0}
+.stat div{flex:1;background:var(--bg2);border-radius:12px;padding:10px;text-align:center}
+.stat b{display:block;font-size:1.3rem;color:var(--acc2)}
+.stat small{color:var(--mut);font-size:.75rem}
+.list-item{display:flex;gap:8px;align-items:flex-start;background:var(--bg2);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:.9rem}
+.list-item span{flex:1}
+.list-item button{background:none;border:0;color:var(--mut);cursor:pointer;font-size:1rem}
+.check{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #26306a;font-size:.93rem;cursor:pointer}
+.check input{width:20px;height:20px;flex:none;accent-color:var(--ok);margin-top:2px}
+.progress{height:8px;background:var(--bg2);border-radius:8px;overflow:hidden;margin:8px 0}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--acc),var(--ok));width:0;transition:width .4s}
+.disc{font-size:.78rem;color:var(--mut);text-align:center;padding:18px 8px 6px}
+.search{margin-bottom:12px}
+.hidden{display:none!important}
+</style>
+</head>
+<body>
+<canvas class="stars" id="stars"></canvas>
+
+<header>
+  <h1>🌙 Insom<span>nia</span></h1>
+  <button class="icon-btn" id="btnNotte" title="Luce rossa notturna">🔴</button>
+</header>
+
+<main>
+
+<!-- ============ HOME ============ -->
+<section class="view on" id="v-home">
+  <div class="hero">
+    <div class="q" id="pensiero"></div>
+    <div class="who">Pensiero della sera</div>
+  </div>
+
+  <div class="grid">
+    <button class="tile" data-go="respiro"><div class="em">🌬️</div><b>Respira</b><small>Guida animata 4-7-8 e altre</small></button>
+    <button class="tile" data-go="suoni"><div class="em">🎧</div><b>Suoni</b><small>Pioggia, onde, rumore rosa…</small></button>
+    <button class="tile" data-go="tecniche"><div class="em">🧠</div><b>Tecniche</b><small>Per addormentarsi e riaddormentarsi</small></button>
+    <button class="tile" data-go="mente"><div class="em">💭</div><b>Pensieri</b><small>Ruminazione e ansia notturna</small></button>
+    <button class="tile" data-go="cucina"><div class="em">🍵</div><b>Tisane e cibo</b><small>Ricette e alimentazione</small></button>
+    <button class="tile" data-go="corpo"><div class="em">🧘</div><b>Corpo</b><small>Esercizi serali e attività fisica</small></button>
+    <button class="tile" data-go="abitudini"><div class="em">🛏️</div><b>Stile di vita</b><small>Igiene del sonno e consigli</small></button>
+    <button class="tile" data-go="diario"><div class="em">📓</div><b>Diario</b><small>Monitora il tuo sonno</small></button>
+  </div>
+
+  <div class="card" id="stasera" style="margin-top:12px">
+    <h3 style="margin-top:0">✔ Rituale di stasera</h3>
+    <div class="progress"><i id="ritBar"></i></div>
+    <div id="ritList"></div>
+    <div class="row" style="margin-top:10px"><button class="btn sec sm" id="ritReset">Azzera</button></div>
+  </div>
+
+
+  <div class="card" style="margin-top:12px">
+    <h3 style="margin-top:0">Sveglio adesso, a letto?</h3>
+    <p style="font-size:.92rem;color:#d5d9ef">Se sei a letto da più di ~20 minuti senza dormire: <b>alzati</b>, vai in un'altra stanza con luce bassa e fai qualcosa di noioso e rilassante. Torna a letto solo quando hai sonno. Non guardare l'ora.</p>
+    <div class="row" style="margin-top:10px">
+      <button class="btn sm" data-go="respiro">Respiro 4-7-8</button>
+      <button class="btn sec sm" data-go="mente">Svuota la mente</button>
+    </div>
+  </div>
+  <p class="disc">Insomnia offre informazioni generali, non sostituisce il medico. Se l'insonnia dura da più di 3 mesi, se russi forte o hai pause nel respiro, gambe irrequiete o sonnolenza di giorno che ti mette a rischio (es. alla guida), parlane con il medico: l'insonnia cronica si cura bene, in primo luogo con la terapia cognitivo-comportamentale (CBT-I).</p>
+</section>
+
+<!-- ============ RESPIRO ============ -->
+<section class="view" id="v-respiro">
+  <h2>🌬️ Respira</h2>
+  <p class="lead">Rallentare il respiro, soprattutto allungando l'espirazione, attiva il sistema parasimpatico e abbassa il battito. Segui la sfera.</p>
+  <div class="chips" id="breathChips"></div>
+  <div class="card" id="breathDesc" style="font-size:.9rem"></div>
+  <div class="breath-wrap">
+    <div class="orb" id="orb"><div class="ph" id="orbPh">Pronto</div><div class="ct" id="orbCt"></div></div>
+    <div class="row" style="justify-content:center">
+      <label style="margin:0">Durata</label>
+      <select id="breathMin" style="width:auto">
+        <option value="2">2 min</option><option value="5" selected>5 min</option><option value="10">10 min</option><option value="15">15 min</option>
+      </select>
+      <button class="btn" id="breathGo">Inizia</button>
+    </div>
+    <label style="display:flex;gap:8px;align-items:center;margin-top:12px"><input type="checkbox" id="breathSnd" style="width:auto" checked> Tono guida leggero</label>
+    <p id="breathLeft" style="color:var(--mut);font-size:.85rem;margin-top:6px"></p>
+  </div>
+</section>
+
+<!-- ============ SUONI ============ -->
+<section class="view" id="v-suoni">
+  <h2>🎧 Suoni per dormire</h2>
+  <p class="lead">Generati dal telefono in tempo reale: funzionano anche offline. Puoi mescolarli e impostare lo spegnimento automatico con dissolvenza.</p>
+  <div class="timerbar">
+    <div class="row">
+      <b style="flex:1">⏲️ Spegnimento</b>
+      <select id="sleepTimer" style="width:auto">
+        <option value="0">Mai</option><option value="15">15 min</option><option value="30" selected>30 min</option><option value="45">45 min</option><option value="60">60 min</option><option value="90">90 min</option>
+      </select>
+      <button class="btn sec sm" id="stopAll">■ Stop</button>
+    </div>
+    <div id="timerLeft" style="color:var(--mut);font-size:.82rem;margin-top:4px"></div>
+    <label>Volume generale</label>
+    <input type="range" id="masterVol" min="0" max="100" value="70" style="accent-color:var(--acc2);padding:0;border:0;background:none">
+  </div>
+  <div id="soundList"></div>
+  <div class="card" style="font-size:.88rem;color:#d5d9ef">
+    <b>Consigli d'uso</b>
+    <ul style="padding-left:18px;margin-top:6px">
+      <li>Volume basso: appena sopra la soglia d'udito, come un sottofondo lontano.</li>
+      <li>Il rumore rosa e marrone coprono i rumori improvvisi (traffico, vicini) meglio del bianco, con un timbro più morbido.</li>
+      <li>Le "onde delta" sono un battimento binaurale: servono le cuffie. Le prove scientifiche sono ancora limitate: usale se ti piacciono.</li>
+      <li>Metti il telefono in modalità aereo/non disturbare e con lo schermo rivolto in basso.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ TECNICHE ============ -->
+<section class="view" id="v-tecniche">
+  <h2>🧠 Tecniche</h2>
+  <p class="lead">Le più efficaci per l'insonnia cronica vengono dalla CBT-I. Le altre aiutano a spegnere mente e corpo al momento.</p>
+  <div class="chips" id="tecChips"></div>
+  <div id="tecList"></div>
+</section>
+
+<!-- ============ MENTE ============ -->
+<section class="view" id="v-mente">
+  <h2>💭 Pensieri persistenti</h2>
+  <p class="lead">La mente che gira a vuoto è una delle cause principali dell'insonnia. Lottare contro i pensieri li rinforza: l'obiettivo è parcheggiarli, non vincerli.</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">🗂️ Parcheggia i pensieri</h3>
+    <p style="font-size:.88rem;color:var(--mut)">Scrivi cosa ti gira in testa. Per ognuno, se c'è, il prossimo piccolo passo. Domani se ne occuperà il "te" riposato.</p>
+    <label for="worryTxt">Pensiero / preoccupazione</label>
+    <textarea id="worryTxt" style="min-height:70px" placeholder="Es. La riunione di domani…"></textarea>
+    <label for="worryStep">Prossimo passo (facoltativo)</label>
+    <input id="worryStep" placeholder="Es. Alle 9 preparo 3 punti">
+    <div class="row" style="margin-top:10px"><button class="btn sm" id="worryAdd">Parcheggia</button><button class="btn sec sm" id="worryClear">Svuota lista</button></div>
+    <div id="worryList"></div>
+    <p style="font-size:.75rem;color:var(--mut);margin-top:6px">Salvato solo su questo dispositivo.</p>
+  </div>
+
+  <div id="menteList"></div>
+</section>
+
+<!-- ============ CUCINA ============ -->
+<section class="view" id="v-cucina">
+  <h2>🍵 Tisane e alimentazione</h2>
+  <p class="lead">Nessun alimento è un sonnifero, ma cosa e quando mangi incide su quanto bene dormi.</p>
+  <div class="chips" id="cucChips"></div>
+  <input class="search" id="cucSearch" placeholder="🔍 Cerca (es. camomilla, latte, banana…)">
+  <div id="cucList"></div>
+</section>
+
+<!-- ============ CORPO ============ -->
+<section class="view" id="v-corpo">
+  <h2>🧘 Corpo</h2>
+  <p class="lead">Il movimento di giorno costruisce il sonno; quello dolce della sera lo prepara.</p>
+  <div class="chips" id="corChips"></div>
+  <div class="card hidden" id="routineBox">
+    <h3 style="margin-top:0" id="rtTitle"></h3>
+    <div class="stat"><div><b id="rtTime">--</b><small>secondi</small></div><div><b id="rtStep">-</b><small>esercizio</small></div></div>
+    <p id="rtName" style="font-weight:700"></p>
+    <p id="rtDesc" style="font-size:.9rem;color:#d5d9ef"></p>
+    <div class="row" style="margin-top:10px"><button class="btn sm" id="rtPause">Pausa</button><button class="btn sec sm" id="rtSkip">Salta ›</button><button class="btn sec sm" id="rtStop">Chiudi</button></div>
+  </div>
+  <div id="corList"></div>
+</section>
+
+<!-- ============ ABITUDINI ============ -->
+<section class="view" id="v-abitudini">
+  <h2>🛏️ Stile di vita e consigli</h2>
+  <p class="lead">L'igiene del sonno da sola raramente guarisce l'insonnia, ma senza di essa le tecniche funzionano peggio.</p>
+  <div class="chips" id="abiChips"></div>
+  <div id="abiList"></div>
+</section>
+
+<!-- ============ DIARIO ============ -->
+<section class="view" id="v-diario">
+  <h2>📓 Diario del sonno</h2>
+  <p class="lead">Annotare per 1–2 settimane mostra cosa succede davvero (spesso dormiamo più di quanto crediamo) ed è la base per la restrizione del sonno.</p>
+  <div class="card">
+    <div class="grid">
+      <div><label>Data (mattina)</label><input type="date" id="dDate"></div>
+      <div><label>Qualità (1–5)</label><select id="dQual"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div>
+      <div><label>A letto alle</label><input type="time" id="dBed" value="23:00"></div>
+      <div><label>Alzato alle</label><input type="time" id="dUp" value="07:00"></div>
+      <div><label>Minuti per addormentarti</label><input type="number" id="dLat" value="20" min="0"></div>
+      <div><label>Minuti svegli nella notte</label><input type="number" id="dWake" value="0" min="0"></div>
+    </div>
+    <label>Note (caffè, sport, stress, alcol…)</label>
+    <input id="dNote" placeholder="Facoltativo">
+    <div class="row" style="margin-top:12px"><button class="btn" id="dSave">Salva notte</button></div>
+  </div>
+  <div class="card">
+    <h3 style="margin-top:0">Ultimi 7 giorni</h3>
+    <div class="stat">
+      <div><b id="sSleep">–</b><small>ore dormite (media)</small></div>
+      <div><b id="sEff">–</b><small>efficienza</small></div>
+      <div><b id="sQual">–</b><small>qualità</small></div>
+    </div>
+    <p id="sAdvice" style="font-size:.88rem;color:#d5d9ef"></p>
+    <div id="dList"></div>
+  </div>
+</section>
+
+</main>
+
+<nav class="bottom" id="nav">
+  <button data-go="home" class="on"><span class="i">🏠</span>Home</button>
+  <button data-go="tecniche"><span class="i">🧠</span>Tecniche</button>
+  <button data-go="suoni"><span class="i">🎧</span>Suoni</button>
+  <button data-go="cucina"><span class="i">🍵</span>Tisane</button>
+  <button data-go="corpo"><span class="i">🧘</span>Corpo</button>
+  <button data-go="abitudini"><span class="i">🛏️</span>Abitudini</button>
+</nav>
+
+<script>
+/* ================= UTIL ================= */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={get(k,d){try{const v=localStorage.getItem('ins_'+k);return v?JSON.parse(v):d}catch(e){return d}},
+             set(k,v){try{localStorage.setItem('ins_'+k,JSON.stringify(v))}catch(e){}}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ================= NAV ================= */
+function go(v){
+  $$('section.view').forEach(s=>s.classList.toggle('on',s.id==='v-'+v));
+  $$('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.go===v));
+  window.scrollTo({top:0});
+  if(location.hash!=='#'+v) history.replaceState(null,'','#'+v);
+}
+document.addEventListener('click',e=>{const t=e.target.closest('[data-go]');if(t)go(t.dataset.go)});
+$('#btnNotte').onclick=()=>{document.body.classList.toggle('notte');store.set('notte',document.body.classList.contains('notte'))};
+if(store.get('notte',false))document.body.classList.add('notte');
+
+/* ================= STELLE ================= */
+(function(){const c=$('#stars'),x=c.getContext('2d');function d(){c.width=innerWidth;c.height=innerHeight;x.clearRect(0,0,c.width,c.height);
+for(let i=0;i<90;i++){x.fillStyle=`rgba(255,255,255,${Math.random()*.6+.1})`;x.beginPath();x.arc(Math.random()*c.width,Math.random()*c.height*.7,Math.random()*1.2,0,7);x.fill()}}
+d();addEventListener('resize',d)})();
+
+/* ================= PENSIERI DELLA SERA ================= */
+const pensieri=[
+ "Il sonno non si cattura: si lascia arrivare. Il tuo compito è solo creare le condizioni.",
+ "Una notte storta non rovina il domani quanto temi. Il corpo sa recuperare.",
+ "Non devi risolvere niente adesso. Di notte i problemi sembrano più grandi di quanto sono.",
+ "Riposare a occhi chiusi, rilassati, è già recupero. Non è tempo perso.",
+ "Ogni pensiero può aspettare fino a domattina. Puoi lasciarlo sul comodino.",
+ "Respira più lento di come stai respirando ora. Solo questo, per un minuto.",
+ "Non contare le ore che mancano. Il tempo passa lo stesso, ma senza ansia è più leggero.",
+ "Stasera non devi dormire bene. Devi solo stare comodo e lasciare che succeda.",
+ "Il letto è per dormire. Se non arriva il sonno, alzarsi è un gesto di cura, non una sconfitta.",
+ "La mente è come acqua agitata: se smetti di mescolarla, si schiarisce da sola."
+];
+$('#pensiero').textContent=pensieri[(new Date().getDate())%pensieri.length];
+
+/* ================= RITUALE ================= */
+const rituale=["Niente caffeina dopo le 14","Cena leggera finita 2–3 ore prima","Luci basse e calde nell'ultima ora","Schermi via 30–60 min prima (o filtro notte)","Doccia o pediluvio tiepido","Camera fresca (17–19 °C) e buia","Pensieri parcheggiati su carta","5 minuti di respiro o stretching","A letto solo quando ho sonno"];
+function renderRit(){
+  const k='rit_'+new Date().toDateString(); const done=store.get(k,[]);
+  $('#ritList').innerHTML=rituale.map((r,i)=>`<label class="check"><input type="checkbox" data-r="${i}" ${done.includes(i)?'checked':''}><span>${r}</span></label>`).join('');
+  $('#ritBar').style.width=(done.length/rituale.length*100)+'%';
+  $$('#ritList input').forEach(c=>c.onchange=()=>{let d=store.get(k,[]);const i=+c.dataset.r;d=c.checked?[...d,i]:d.filter(x=>x!==i);store.set(k,d);renderRit()});
+  $('#ritReset').onclick=()=>{store.set(k,[]);renderRit()};
+}
+renderRit();
+
+/* ================= AUDIO ================= */
+let AC=null, master=null;
+function ac(){if(!AC){AC=new (window.AudioContext||window.webkitAudioContext)();master=AC.createGain();master.gain.value=$('#masterVol').value/100;master.connect(AC.destination)}
+  if(AC.state==='suspended')AC.resume();return AC}
+function noiseBuf(type,sec=10){
+  const a=ac(),len=a.sampleRate*sec,b=a.createBuffer(2,len,a.sampleRate);
+  for(let ch=0;ch<2;ch++){const d=b.getChannelData(ch);let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0,last=0;
+    for(let i=0;i<len;i++){const w=Math.random()*2-1;
+      if(type==='white')d[i]=w*.3;
+      else if(type==='pink'){b0=.99886*b0+w*.0555179;b1=.99332*b1+w*.0750759;b2=.969*b2+w*.153852;b3=.8665*b3+w*.3104856;b4=.55*b4+w*.5329522;b5=-.7616*b5-w*.016898;d[i]=(b0+b1+b2+b3+b4+b5+b6+w*.5362)*.09;b6=w*.115926}
+      else{last=(last+.02*w)/1.02;d[i]=last*3.2}}
+    // dissolvenza ai bordi per loop senza click
+    const f=2000;for(let i=0;i<f;i++){const g=i/f;d[i]*=g;d[len-1-i]*=g}}
+  return b}
+function src(buf){const s=ac().createBufferSource();s.buffer=buf;s.loop=true;return s}
+function lfo(freq,amount,target,offset){const a=ac(),o=a.createOscillator(),g=a.createGain();o.frequency.value=freq;g.gain.value=amount;o.connect(g);g.connect(target);if(offset!==undefined)target.value=offset;o.start();return o}
+
+const sounds=[
+ {id:'pioggia',em:'🌧️',n:'Pioggia',d:'Pioggia costante su un tetto',build(out){const a=ac(),s=src(noiseBuf('pink')),hp=a.createBiquadFilter(),lp=a.createBiquadFilter();hp.type='highpass';hp.frequency.value=400;lp.type='lowpass';lp.frequency.value=6000;s.connect(hp);hp.connect(lp);lp.connect(out);
+   const s2=src(noiseBuf('white',7)),bp=a.createBiquadFilter(),g2=a.createGain();bp.type='bandpass';bp.frequency.value=3000;bp.Q.value=.6;g2.gain.value=.25;s2.connect(bp);bp.connect(g2);g2.connect(out);const l=lfo(.15,.12,g2.gain,.25);
+   s.start();s2.start();return[s,s2,l]}},
+ {id:'onde',em:'🌊',n:'Onde del mare',d:'Risacca lenta, ~8 respiri al minuto',build(out){const a=ac(),s=src(noiseBuf('brown')),lp=a.createBiquadFilter(),g=a.createGain();lp.type='lowpass';lp.frequency.value=700;g.gain.value=.5;s.connect(lp);lp.connect(g);g.connect(out);
+   const l1=lfo(.13,.45,g.gain,.5),l2=lfo(.13,500,lp.frequency,800);s.start();return[s,l1,l2]}},
+ {id:'rosa',em:'🌸',n:'Rumore rosa',d:'Morbido e uniforme, copre i rumori',build(out){const s=src(noiseBuf('pink'));s.connect(out);s.start();return[s]}},
+ {id:'marrone',em:'🟤',n:'Rumore marrone',d:'Profondo e cupo, come un fiume lontano',build(out){const a=ac(),s=src(noiseBuf('brown')),lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.value=900;s.connect(lp);lp.connect(out);s.start();return[s]}},
+ {id:'vento',em:'🍃',n:'Vento tra gli alberi',d:'Fruscio che va e viene',build(out){const a=ac(),s=src(noiseBuf('pink')),bp=a.createBiquadFilter(),g=a.createGain();bp.type='bandpass';bp.Q.value=1.2;g.gain.value=.6;s.connect(bp);bp.connect(g);g.connect(out);
+   const l1=lfo(.05,350,bp.frequency,600),l2=lfo(.08,.35,g.gain,.6);s.start();return[s,l1,l2]}},
+ {id:'fuoco',em:'🔥',n:'Camino',d:'Brusio caldo con scoppiettii',build(out){const a=ac(),s=src(noiseBuf('brown')),lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.value=500;s.connect(lp);lp.connect(out);s.start();
+   const cg=a.createGain();cg.gain.value=.5;cg.connect(out);const cb=a.createBuffer(1,a.sampleRate*6,a.sampleRate),cd=cb.getChannelData(0);
+   for(let k=0;k<70;k++){const p=Math.floor(Math.random()*(cd.length-800)),amp=Math.random()*.8+.2,L=Math.floor(Math.random()*500+80);for(let i=0;i<L;i++)cd[p+i]+=(Math.random()*2-1)*amp*Math.exp(-i/(L/5))}
+   const cs=a.createBufferSource();cs.buffer=cb;cs.loop=true;const hp=a.createBiquadFilter();hp.type='highpass';hp.frequency.value=1500;cs.connect(hp);hp.connect(cg);cs.start();return[s,cs]}},
+ {id:'pad',em:'🎹',n:'Armonia lenta',d:'Accordo ambient che respira piano',build(out){const a=ac(),g=a.createGain(),lp=a.createBiquadFilter();lp.type='lowpass';lp.frequency.value=900;g.gain.value=.12;lp.connect(g);g.connect(out);
+   const nodes=[];[110,164.81,220,277.18,329.63].forEach((f,i)=>{[-4,4].forEach(dt=>{const o=a.createOscillator();o.type=i%2?'sine':'triangle';o.frequency.value=f;o.detune.value=dt;const og=a.createGain();og.gain.value=.5/(i+1);o.connect(og);og.connect(lp);o.start();nodes.push(o);
+     nodes.push(lfo(.03+i*.011,.25/(i+1),og.gain,.5/(i+1)))})});nodes.push(lfo(.02,300,lp.frequency,900));return nodes}},
+ {id:'delta',em:'🎧',n:'Onde delta (cuffie)',d:'Battimento binaurale a 2 Hz',build(out){const a=ac(),m=a.createChannelMerger(2),g=a.createGain();g.gain.value=.25;const L=a.createOscillator(),R=a.createOscillator();L.frequency.value=180;R.frequency.value=182;L.connect(m,0,0);R.connect(m,0,1);m.connect(g);g.connect(out);L.start();R.start();return[L,R]}}
+];
+const playing={};
+function renderSounds(){
+  $('#soundList').innerHTML=sounds.map(s=>`<div class="snd"><div class="em">${s.em}</div><div class="info"><b>${s.n}</b><small>${s.d}</small>
+   <input type="range" min="0" max="100" value="60" data-vol="${s.id}"></div><button class="tog" data-snd="${s.id}">▶</button></div>`).join('');
+  $$('[data-snd]').forEach(b=>b.onclick=()=>toggleSound(b.dataset.snd));
+  $$('[data-vol]').forEach(r=>r.oninput=()=>{const p=playing[r.dataset.vol];if(p)p.g.gain.setTargetAtTime(r.value/100,ac().currentTime,.1)});
+}
+function toggleSound(id){
+  const btn=$(`[data-snd="${id}"]`);
+  if(playing[id]){stopSound(id);return}
+  const a=ac(),g=a.createGain();g.gain.value=0;g.connect(master);
+  const vol=$(`[data-vol="${id}"]`).value/100;g.gain.setTargetAtTime(vol,a.currentTime,.8);
+  const nodes=sounds.find(s=>s.id===id).build(g);playing[id]={g,nodes};btn.classList.add('on');btn.textContent='❚❚';
+  master.gain.cancelScheduledValues(a.currentTime);master.gain.setTargetAtTime($('#masterVol').value/100,a.currentTime,.1);
+  startTimer();
+}
+function stopSound(id){const p=playing[id];if(!p)return;const a=ac();p.g.gain.setTargetAtTime(0,a.currentTime,.4);
+  setTimeout(()=>{p.nodes.forEach(n=>{try{n.stop()}catch(e){}});p.g.disconnect()},1800);delete playing[id];
+  const b=$(`[data-snd="${id}"]`);b.classList.remove('on');b.textContent='▶';if(!Object.keys(playing).length)clearTimer()}
+function stopAll(){Object.keys(playing).forEach(stopSound)}
+$('#stopAll').onclick=stopAll;
+$('#masterVol').oninput=e=>{if(master)master.gain.setTargetAtTime(e.target.value/100,ac().currentTime,.1)};
+let tEnd=0,tInt=null;
+function startTimer(){const m=+$('#sleepTimer').value;clearTimer(true);if(!m)return;tEnd=Date.now()+m*60000;tInt=setInterval(tick,1000);tick()}
+function clearTimer(keep){clearInterval(tInt);tInt=null;if(!keep)$('#timerLeft').textContent=''}
+function tick(){const left=tEnd-Date.now();
+  if(left<=60000&&left>0&&master&&!tick.fading){tick.fading=true;master.gain.setTargetAtTime(0,ac().currentTime,15)}
+  if(left<=0){tick.fading=false;stopAll();$('#timerLeft').textContent='Spento. Buonanotte 🌙';clearInterval(tInt);return}
+  const mm=Math.floor(left/60000),ss=Math.floor(left%60000/1000);$('#timerLeft').textContent=`Si spegne tra ${mm}:${String(ss).padStart(2,'0')} con dissolvenza`}
+$('#sleepTimer').onchange=()=>{tick.fading=false;if(Object.keys(playing).length)startTimer()};
+renderSounds();
+
+/* ================= RESPIRO ================= */
+const respiri=[
+ {id:'478',n:'4-7-8',ph:[['Inspira',4],['Trattieni',7],['Espira',8]],d:'Inspira dal naso per 4, trattieni per 7, espira dalla bocca lentamente per 8 (con un leggero soffio). Ottimo a letto. Se trattenere 7 secondi ti affatica, riduci tutto in proporzione.'},
+ {id:'coer',n:'Coerente 5-5',ph:[['Inspira',5],['Espira',5]],d:'Circa 6 respiri al minuto: favorisce la coerenza cardiaca e la variabilità della frequenza cardiaca. Respira con la pancia, senza forzare.'},
+ {id:'lungo',n:'Espiro lungo 4-6',ph:[['Inspira',4],['Espira',6]],d:'Il più semplice: espirazione più lunga dell\'inspirazione. Ideale se ti svegli di notte con il cuore che batte.'},
+ {id:'box',n:'Quadrato 4-4-4-4',ph:[['Inspira',4],['Trattieni',4],['Espira',4],['Pausa',4]],d:'Usato anche da atleti e militari per calmarsi sotto stress. Utile prima di andare a letto se la giornata è stata intensa.'},
+ {id:'sosp',n:'Sospiro fisiologico',ph:[['Inspira',2],['Ancora un po\'',1],['Espira lento',6]],d:'Doppia inspirazione dal naso (una piena + una piccola aggiunta) e lunga espirazione dalla bocca. Uno dei modi più rapidi per scaricare la tensione.'}
+];
+let bSel=respiri[0],bRun=false,bTo=null,bCt=null,bEnd=0;
+$('#breathChips').innerHTML=respiri.map((r,i)=>`<button class="chip ${i?'':'on'}" data-b="${r.id}">${r.n}</button>`).join('');
+$$('[data-b]').forEach(c=>c.onclick=()=>{if(bRun)stopBreath();bSel=respiri.find(r=>r.id===c.dataset.b);$$('[data-b]').forEach(x=>x.classList.toggle('on',x===c));$('#breathDesc').textContent=bSel.d});
+$('#breathDesc').textContent=bSel.d;
+function beep(f){if(!$('#breathSnd').checked)return;const a=ac(),o=a.createOscillator(),g=a.createGain();o.frequency.value=f;o.type='sine';g.gain.value=0;g.gain.setTargetAtTime(.08,a.currentTime,.05);g.gain.setTargetAtTime(0,a.currentTime+.35,.2);o.connect(g);g.connect(master);o.start();o.stop(a.currentTime+1.5)}
+function stopBreath(){bRun=false;clearTimeout(bTo);clearInterval(bCt);$('#breathGo').textContent='Inizia';$('#orbPh').textContent='Pronto';$('#orbCt').textContent='';$('#orb').style.transition='transform 1.5s';$('#orb').style.transform='scale(.55)';$('#breathLeft').textContent=''}
+$('#breathGo').onclick=()=>{
+  if(bRun){stopBreath();return}
+  ac();bRun=true;$('#breathGo').textContent='Stop';bEnd=Date.now()+$('#breathMin').value*60000;let i=0;
+  const step=()=>{if(!bRun)return;
+    if(Date.now()>=bEnd){stopBreath();$('#orbPh').textContent='Fatto 🌙';return}
+    const [name,sec]=bSel.ph[i%bSel.ph.length];const orb=$('#orb');orb.style.transition=`transform ${sec}s ease-in-out`;
+    if(/Insp|Ancora/.test(name)){orb.style.transform=name.startsWith('Ancora')?'scale(1.05)':'scale(1)';beep(name.startsWith('Ancora')?440:392)}
+    else if(/Esp/.test(name)){orb.style.transform='scale(.55)';beep(262)}
+    $('#orbPh').textContent=name;let c=sec;$('#orbCt').textContent=c;clearInterval(bCt);
+    bCt=setInterval(()=>{c--;if(c>0)$('#orbCt').textContent=c;const l=Math.max(0,bEnd-Date.now());$('#breathLeft').textContent=`Restano ${Math.ceil(l/60000)} min`},1000);
+    i++;bTo=setTimeout(step,sec*1000)};
+  step();
+};
+
+/* ================= GENERATORE SEZIONI ================= */
+function section(listSel,chipSel,data,searchSel){
+  const cats=['Tutte',...new Set(data.map(d=>d.c))];let cur='Tutte';
+  const draw=()=>{const q=searchSel?$(searchSel).value.toLowerCase().trim():'';
+    $(listSel).innerHTML=data.filter(d=>(cur==='Tutte'||d.c===cur)&&(!q||(d.t+d.b).toLowerCase().includes(q))).map(d=>
+      `<details><summary>${d.e||''} ${d.t}${d.c&&cur==='Tutte'?`<span class="tag">${d.c}</span>`:''}</summary><div class="body">${d.b}${d.run?`<div class="row" style="margin-top:10px"><button class="btn sm" data-run="${d.run}">▶ Avvia guida a tempo</button></div>`:''}</div></details>`).join('')||'<p class="lead">Nessun risultato.</p>'};
+  if(chipSel){$(chipSel).innerHTML=cats.map(c=>`<button class="chip ${c===cur?'on':''}">${c}</button>`).join('');
+    $(chipSel).querySelectorAll('.chip').forEach(b=>b.onclick=()=>{cur=b.textContent;$(chipSel).querySelectorAll('.chip').forEach(x=>x.classList.toggle('on',x===b));draw()})}
+  if(searchSel)$(searchSel).oninput=draw;draw();
+}
+
+/* ================= TECNICHE ================= */
+const tecniche=[
+{c:'CBT-I',e:'🛌',t:'Controllo dello stimolo',b:`<p>Serve a ricollegare il letto al sonno (e non alla veglia e all'ansia). È una delle tecniche con più prove di efficacia.</p><ol><li>Vai a letto <b>solo quando hai sonno</b> (palpebre pesanti, sbadigli), non solo stanchezza.</li><li>Usa il letto solo per dormire e per l'intimità: niente telefono, TV, lavoro, discussioni.</li><li>Se non dormi entro ~20 minuti (stimati, senza guardare l'orologio), <b>alzati</b> e vai in un'altra stanza. Luce bassa, attività noiosa e piacevole.</li><li>Torna a letto quando torna il sonno. Ripeti tutte le volte necessarie.</li><li>Sveglia <b>alla stessa ora ogni mattina</b>, weekend compresi.</li><li>Niente pisolini, o al massimo 20 minuti prima delle 15.</li></ol><div class="note">Le prime notti possono essere dure: è normale. I risultati arrivano di solito in 2–4 settimane di costanza.</div>`},
+{c:'CBT-I',e:'⏳',t:'Restrizione del sonno',b:`<p>Si riduce il tempo passato a letto fino a quanto dormi davvero, così il sonno diventa più profondo e continuo. Poi si allunga gradualmente.</p><ol><li>Compila il <b>diario del sonno</b> per una settimana e calcola le ore dormite in media.</li><li>Imposta la "finestra di sonno" uguale a quella media (mai meno di 5,5–6 ore).</li><li>Fissa la sveglia e conta all'indietro: es. sveglia 6:30, finestra 6 h → a letto non prima delle 0:30.</li><li>Quando l'efficienza (tempo dormito / tempo a letto) supera l'85–90% per una settimana, anticipa di 15–20 minuti.</li></ol><div class="note">Aumenta la sonnolenza diurna nelle prime settimane: attenzione alla guida. Sconsigliata senza supervisione medica se soffri di epilessia, disturbo bipolare, apnee notturne o in gravidanza.</div>`},
+{c:'CBT-I',e:'🔄',t:'Ristrutturazione dei pensieri sul sonno',b:`<p>Alcune convinzioni alimentano l'insonnia creando ansia da prestazione. Riconoscile e correggile:</p><ul><li>"Devo dormire 8 ore o domani sarà un disastro" → <i>Il fabbisogno varia; dopo una notte corta di solito funzioniamo meglio del previsto.</i></li><li>"Non ho chiuso occhio" → <i>Spesso si dorme a tratti senza accorgersene; il diario lo mostra.</i></li><li>"Se non dormo mi ammalerò" → <i>Il corpo compensa: dopo una notte scarsa il sonno successivo è più profondo.</i></li><li>"Devo sforzarmi di dormire" → <i>Lo sforzo attiva: il sonno arriva quando smetti di inseguirlo.</i></li></ul>`},
+{c:'Addormentarsi',e:'🔀',t:'Mescolamento cognitivo',b:`<p>Imita i pensieri sconnessi tipici del dormiveglia e "inganna" il cervello.</p><ol><li>Scegli una parola neutra, es. <b>CANDELA</b>.</li><li>Per ogni lettera, pensa a più parole che iniziano con quella: C → casa, cane, cielo…</li><li>Per ognuna <b>immagina</b> l'oggetto per qualche secondo, poi passa alla successiva.</li><li>Quando finisci le idee, passa alla lettera dopo. Niente logica, niente collegamenti.</li></ol>`},
+{c:'Addormentarsi',e:'🪖',t:'Metodo "militare" del rilassamento',b:`<ol><li>Rilassa i muscoli del viso: fronte, mascella, lingua, intorno agli occhi.</li><li>Lascia cadere le spalle il più in basso possibile, poi braccia e mani, un lato alla volta.</li><li>Espira e rilassa il torace.</li><li>Rilassa gambe: cosce, polpacci, piedi.</li><li>Per 10 secondi immagina una scena calma (stare su una canoa in un lago immobile) oppure ripeti: "non pensare, non pensare".</li></ol>`},
+{c:'Addormentarsi',e:'💪',t:'Rilassamento muscolare progressivo',run:'pmr',b:`<p>Contrarre e poi rilasciare i muscoli aiuta a sentire (e sciogliere) la tensione nascosta.</p><ol><li>Per ogni gruppo: contrai per 5 secondi (non al massimo, ~70%), poi rilascia di colpo e senti la differenza per 15–20 secondi.</li><li>Ordine: piedi → polpacci → cosce → glutei → pancia → mani → braccia → spalle → collo → viso.</li><li>Espira quando rilasci.</li></ol><div class="note">Evita di contrarre zone con dolori o infortuni.</div>`},
+{c:'Addormentarsi',e:'🧍',t:'Body scan',b:`<p>Porta l'attenzione lentamente su ogni parte del corpo, dai piedi alla testa, senza cambiare nulla: solo notare peso, calore, contatto col materasso. Quando la mente scappa, riportala gentilmente dove eri. Non serve "riuscire": la pratica stessa rilassa.</p>`},
+{c:'Addormentarsi',e:'🏞️',t:'Visualizzazione guidata',b:`<p>Immagina un luogo sicuro con tutti i sensi: cosa vedi, che suoni ci sono, la temperatura, l'odore, cosa tocchi. Più dettagli, meno spazio alle preoccupazioni. Torna sempre allo stesso luogo: diventa un "segnale" di sonno.</p>`},
+{c:'Addormentarsi',e:'🙃',t:'Intenzione paradossale',b:`<p>Sdraiato al buio, con gli occhi aperti, ti proponi di <b>restare sveglio</b> ancora un po', senza fare nulla. Toglie l'ansia da prestazione ("devo dormire") e spesso il sonno arriva da solo. Utile soprattutto per chi si agita perché "non riesce".</p>`},
+{c:'Addormentarsi',e:'🔢',t:'Conteggio all\'indietro con il respiro',b:`<p>Parti da 300 e scendi di 3 ad ogni espirazione (300, 297, 294…). Abbastanza impegnativo da occupare la mente, abbastanza noioso da annoiarla. Se perdi il conto, ricomincia senza giudicarti.</p>`},
+{c:'Risvegli notturni',e:'🌑',t:'Se ti svegli alle 3 di notte',b:`<ol><li><b>Non guardare l'ora</b>: calcolare quanto manca accende l'ansia. Gira la sveglia.</li><li>Niente telefono: luce e contenuti risvegliano.</li><li>Fai 10 respiri con espiro lungo (4-6) o un body scan.</li><li>Se dopo ~20 minuti sei ancora sveglio e agitato, alzati: luce soffusa, lettura leggera su carta, poi torna a letto.</li><li>Ricorda: i brevi risvegli sono normali tra un ciclo di sonno e l'altro. Il problema è solo la paura del risveglio.</li></ol>`},
+{c:'Risvegli notturni',e:'🚽',t:'Risvegli per andare in bagno',b:`<ul><li>Riduci i liquidi nelle 2 ore prima di dormire (bevi bene durante il giorno).</li><li>Limita alcol, tè e caffè la sera: sono diuretici.</li><li>Usa una lucina notturna calda e bassa, non accendere la luce piena.</li><li>Se succede più di due volte a notte in modo regolare, parlane con il medico.</li></ul>`},
+{c:'Mattino',e:'☀️',t:'Ancorare il ritmo al mattino',b:`<p>Il sonno della sera si prepara al mattino.</p><ul><li>Alzati sempre alla stessa ora, anche dopo una notte storta.</li><li>Prendi luce naturale entro un'ora dal risveglio: 15–30 minuti all'aperto (anche nuvoloso).</li><li>Colazione e movimento al mattino rinforzano l'orologio biologico.</li><li>Non "recuperare" dormendo fino a tardi: sposta il ritmo e peggiora la notte dopo.</li></ul>`}
+];
+section('#tecList','#tecChips',tecniche);
+
+/* ================= MENTE ================= */
+const mente=[
+{e:'⏰',t:'Il "tempo delle preoccupazioni"',b:`<p>Dedica 15–20 minuti fissi nel pomeriggio o prima di cena (mai a letto) solo alle preoccupazioni.</p><ol><li>Scrivi tutto ciò che ti preoccupa.</li><li>Accanto, separa ciò che puoi controllare da ciò che non puoi.</li><li>Per ciò che puoi controllare, scrivi un passo concreto.</li><li>Se di notte arriva un pensiero, ricordati: "ha il suo appuntamento domani alle 18".</li></ol>`},
+{e:'📝',t:'Lista delle cose da fare',b:`<p>Scrivere 5 minuti prima di dormire le cose da fare nei giorni successivi aiuta ad addormentarsi più velocemente: il cervello non deve più "tenerle a mente". Sii specifico.</p>`},
+{e:'☁️',t:'Defusione: i pensieri come nuvole',b:`<p>Non sei i tuoi pensieri. Prova a notarli con un'etichetta: "Sto avendo il pensiero che domani andrà male". Oppure immagina ogni pensiero su una foglia che scorre in un ruscello, o una nuvola che passa. Non spingere via, non seguire: lascia passare.</p>`},
+{e:'🔁',t:'Pensieri ricorrenti e ruminazione',b:`<p>La ruminazione è ripassare all'infinito lo stesso problema senza arrivare a una soluzione.</p><ul><li>Chiediti: "Sto risolvendo o sto girando in tondo?" Se giri in tondo, è ruminazione.</li><li>Sposta l'attenzione su qualcosa di sensoriale: il respiro, il contatto delle lenzuola, un suono.</li><li>Rimanda: "Ci penserò domani alle 10, adesso non posso farci niente".</li><li>Il mescolamento cognitivo (in Tecniche) è un ottimo "interruttore".</li></ul>`},
+{e:'🌪️',t:'Pensieri catastrofici notturni',b:`<p>Di notte la parte del cervello che ragiona è meno attiva e le emozioni sono amplificate: tutto sembra più grave.</p><ul><li>Ricordati: "È un pensiero delle 3 di notte. Domattina lo vedrò diverso".</li><li>Domandati: "Qual è lo scenario più probabile, non il peggiore?"</li><li>"Cosa direi a un amico che mi raccontasse questo pensiero?"</li></ul>`},
+{e:'💓',t:'Ansia fisica: cuore che batte, agitazione',b:`<ul><li>Sospiro fisiologico 3–5 volte (sezione Respira).</li><li>Mani sul petto e sulla pancia: senti il respiro rallentare.</li><li>Tecnica 5-4-3-2-1: nomina 5 cose che senti al tatto, 4 suoni, 3 sensazioni del corpo, 2 odori, 1 respiro profondo.</li><li>Un bicchiere d'acqua fresca e alzarsi qualche minuto aiuta a "resettare".</li></ul>`},
+{e:'🙏',t:'Tre cose belle',b:`<p>Prima di dormire, annota tre cose andate bene oggi, anche piccole, e perché. Spostare l'attenzione su ciò che è positivo riduce l'attivazione serale ed è associato a un sonno migliore.</p>`},
+{e:'📵',t:'Notizie, social e lavoro',b:`<p>Contenuti che attivano emozioni (notizie, discussioni, email di lavoro) tengono il cervello in allerta. Stabilisci un "coprifuoco digitale" e una frase di chiusura della giornata: "Per oggi ho fatto abbastanza".</p>`},
+{e:'🩺',t:'Quando chiedere aiuto',b:`<p>Se i pensieri sono costanti, ti tolgono piacere nelle cose, o se sono presenti umore molto basso o ansia che dura da settimane, rivolgiti al medico o a uno psicologo. Insonnia, ansia e depressione si alimentano a vicenda e si curano meglio insieme. Se hai pensieri di farti del male, chiama subito il 112.</p>`}
+];
+section('#menteList',null,mente);
+function renderWorry(){const w=store.get('worry',[]);$('#worryList').innerHTML=w.map((x,i)=>`<div class="list-item"><span>📌 ${esc(x.t)}${x.s?`<br><small style="color:var(--ok)">→ ${esc(x.s)}</small>`:''}</span><button data-w="${i}">✕</button></div>`).join('');
+  $$('[data-w]').forEach(b=>b.onclick=()=>{const w=store.get('worry',[]);w.splice(+b.dataset.w,1);store.set('worry',w);renderWorry()})}
+$('#worryAdd').onclick=()=>{const t=$('#worryTxt').value.trim();if(!t)return;const w=store.get('worry',[]);w.unshift({t,s:$('#worryStep').value.trim()});store.set('worry',w);$('#worryTxt').value='';$('#worryStep').value='';renderWorry()};
+$('#worryClear').onclick=()=>{store.set('worry',[]);renderWorry()};
+renderWorry();
+
+/* ================= CUCINA ================= */
+const cucina=[
+{c:'Tisane',e:'🌼',t:'Camomilla classica',b:`<p><b>Ingredienti (1 tazza):</b> 1 cucchiaio di fiori di camomilla essiccati (o 1 bustina), 250 ml d'acqua, 1 cucchiaino di miele (facoltativo).</p><ol><li>Porta l'acqua quasi a bollore e spegni.</li><li>Aggiungi i fiori, copri e lascia in infusione 7–10 minuti (coperto, per non perdere gli oli essenziali).</li><li>Filtra, aggiungi il miele quando è tiepida.</li></ol><p>Bevila 30–60 minuti prima di dormire.</p><div class="note">Evitala se sei allergico ad asteracee (ambrosia, margherite, arnica). Cautela con anticoagulanti.</div>`},
+{c:'Tisane',e:'🌿',t:'Melissa e passiflora',b:`<p><b>Ingredienti:</b> 1 cucchiaino di foglie di melissa, 1 cucchiaino di passiflora (parti aeree), 250 ml d'acqua.</p><ol><li>Versa l'acqua appena bollita sulle erbe.</li><li>Copri e lascia 10 minuti.</li><li>Filtra. Facoltativa una scorza di limone.</li></ol><p>La melissa è tradizionalmente usata per l'agitazione, la passiflora per l'ansia lieve.</p><div class="note">Passiflora: non in gravidanza/allattamento; può sommarsi a sedativi e ansiolitici.</div>`},
+{c:'Tisane',e:'💜',t:'Lavanda e camomilla',b:`<p><b>Ingredienti:</b> 1 cucchiaio di camomilla, ½ cucchiaino di fiori di lavanda alimentare, 250 ml d'acqua, miele.</p><ol><li>Infusione coperta 5–7 minuti (la lavanda oltre diventa amara).</li><li>Filtra e dolcifica.</li></ol><p>Il profumo della lavanda è già parte del rilassamento: annusala mentre si raffredda.</p>`},
+{c:'Tisane',e:'🌱',t:'Valeriana, luppolo e menta',b:`<p><b>Ingredienti:</b> 1 cucchiaino di radice di valeriana, ½ cucchiaino di coni di luppolo, qualche foglia di menta (per il sapore), 300 ml d'acqua.</p><ol><li>La radice di valeriana va in <b>decotto</b>: falla bollire piano 5 minuti.</li><li>Spegni, aggiungi luppolo e menta, copri 10 minuti.</li><li>Filtra.</li></ol><p>Odore forte (la valeriana sa di "terra"): la menta aiuta.</p><div class="note">Valeriana: non in gravidanza, allattamento, sotto i 12 anni, né con alcol, sonniferi o ansiolitici. Può dare sonnolenza al mattino: non guidare se ti senti intontito. Effetto più evidente dopo 2–4 settimane di uso regolare. Chiedi al medico se prendi farmaci.</div>`},
+{c:'Tisane',e:'🍋',t:'Tiglio e fiori d\'arancio',b:`<p><b>Ingredienti:</b> 1 cucchiaio di fiori di tiglio, 1 cucchiaino di fiori d'arancio amaro (zagara), 250 ml d'acqua.</p><ol><li>Acqua appena sotto il bollore, infusione coperta 8 minuti.</li><li>Filtra.</li></ol><p>Delicata e profumata, adatta anche a chi non ama il sapore erbaceo.</p>`},
+{c:'Tisane',e:'🥛',t:'Golden milk serale (latte d\'oro)',b:`<p><b>Ingredienti:</b> 250 ml di latte (o bevanda vegetale), ½ cucchiaino di curcuma, un pizzico di pepe nero, un pizzico di cannella, 1 cucchiaino di miele, (facoltativo) un pizzico di noce moscata.</p><ol><li>Scalda il latte senza bollire con le spezie, mescolando 3–4 minuti.</li><li>Spegni, aggiungi il miele.</li></ol><p>Il gesto di una bevanda calda è di per sé un rituale di "chiusura" della giornata.</p><div class="note">Curcuma: cautela con anticoagulanti e calcoli biliari.</div>`},
+{c:'Tisane',e:'🍒',t:'Succo di amarena (ciliegia acida) caldo',b:`<p><b>Ingredienti:</b> 150 ml di succo di amarena/ciliegia acida 100% senza zuccheri aggiunti, 100 ml d'acqua calda, cannella.</p><p>La ciliegia acida (Montmorency) contiene melatonina naturale; alcuni piccoli studi mostrano un modesto beneficio sulla durata del sonno.</p>`},
+{c:'Ricette',e:'🍌',t:'Spuntino serale: banana e mandorle',b:`<p><b>Ingredienti:</b> 1 banana piccola, 10–12 mandorle o 1 cucchiaio di burro di mandorle, una spolverata di cannella.</p><p>Banana e frutta secca forniscono magnesio e potassio; i carboidrati favoriscono l'ingresso di triptofano nel cervello. Da consumare 1 ora prima di dormire se hai fame: andare a letto affamati disturba il sonno quanto andarci sazi.</p>`},
+{c:'Ricette',e:'🥣',t:'Porridge della buonanotte',b:`<p><b>Ingredienti (1 porzione):</b> 30 g di fiocchi d'avena, 150 ml di latte, 1 cucchiaino di miele, 1 cucchiaio di noci tritate, qualche fetta di kiwi o amarene.</p><ol><li>Cuoci l'avena nel latte 4–5 minuti mescolando.</li><li>Aggiungi miele, noci e frutta.</li></ol><p>Avena e latte: carboidrati complessi + triptofano. Porzione piccola!</p>`},
+{c:'Ricette',e:'🥝',t:'Due kiwi prima di dormire',b:`<p>In uno studio, mangiare 2 kiwi un'ora prima di andare a letto per 4 settimane ha migliorato tempo di addormentamento e durata del sonno. Semplice, leggero, ricco di serotonina e vitamina C. Da provare.</p>`},
+{c:'Ricette',e:'🍲',t:'Cena "amica del sonno": riso, salmone e verdure',b:`<p><b>Ingredienti (1 persona):</b> 70 g di riso basmati, 120 g di salmone (o sgombro, sardine), spinaci o zucchine, olio extravergine, limone, semi di zucca.</p><ol><li>Cuoci il riso.</li><li>Salmone al forno o in padella 8–10 minuti, verdure saltate con olio.</li><li>Completa con semi di zucca e limone.</li></ol><p>Pesce azzurro (omega-3, vitamina D), semi di zucca e verdure a foglia (magnesio), riso (carboidrati). Cena 2–3 ore prima di dormire.</p>`},
+{c:'Ricette',e:'🥗',t:'Cena vegetariana: pasta e ceci leggera',b:`<p><b>Ingredienti:</b> 60 g di pasta corta, 100 g di ceci cotti, rosmarino, aglio, olio, un cucchiaio di parmigiano.</p><ol><li>Insaporisci i ceci con olio, aglio e rosmarino, frulla metà con un po' d'acqua.</li><li>Cuoci la pasta e mantecala con la crema di ceci.</li></ol><p>Legumi = triptofano, magnesio, B6. Porzione moderata, poco piccante.</p>`},
+{c:'Alimentazione',e:'✅',t:'Cibi che favoriscono il sonno',b:`<ul><li><b>Triptofano</b> (precursore di serotonina e melatonina): latte e yogurt, uova, tacchino, legumi, semi di zucca, avena.</li><li><b>Magnesio</b>: verdure a foglia verde, mandorle, noci, cacao amaro (poco, ha teobromina), cereali integrali, legumi.</li><li><b>Melatonina naturale</b>: ciliegie acide, kiwi, noci, pomodori, uva.</li><li><b>Omega-3 e vitamina D</b>: pesce azzurro, salmone.</li><li><b>Carboidrati complessi</b> la sera: riso, pasta, patate, pane integrale, in porzioni moderate.</li></ul>`},
+{c:'Alimentazione',e:'⛔',t:'Cosa evitare la sera',b:`<ul><li><b>Caffeina</b> (caffè, tè nero e verde, cola, energy drink, cioccolato fondente): l'effetto dura 6–8 ore. Ultima dose entro le 14.</li><li><b>Alcol</b>: fa addormentare prima ma frammenta il sonno nella seconda metà della notte e peggiora russamento e apnee.</li><li>Cene <b>abbondanti, grasse, fritte o piccanti</b>: rallentano la digestione e favoriscono il reflusso.</li><li><b>Zuccheri</b> e dolci a fine pasto: picchi e cali glicemici.</li><li>Troppi <b>liquidi</b> nelle 2 ore prima: risvegli per il bagno.</li><li><b>Nicotina</b>: è uno stimolante.</li></ul>`},
+{c:'Alimentazione',e:'🕰️',t:'Orari dei pasti',b:`<ul><li>Pasti a orari regolari aiutano l'orologio biologico.</li><li>Cena 2–3 ore prima di coricarti.</li><li>Colazione entro un'ora dal risveglio: segnala al corpo che è giorno.</li><li>Se hai fame tardi: piccolo spuntino (yogurt, banana, qualche mandorla).</li></ul>`},
+{c:'Alimentazione',e:'💊',t:'Integratori: cosa sapere',b:`<p>Melatonina, magnesio, valeriana e altri prodotti da banco possono essere utili in alcuni casi (es. jet lag, ritmo spostato), ma dose, orario e durata contano molto e ci sono interazioni con farmaci. Parlane con il medico o il farmacista prima di usarli regolarmente, soprattutto se prendi altri farmaci, sei in gravidanza o hai patologie.</p>`}
+];
+section('#cucList','#cucChips',cucina,'#cucSearch');
+
+/* ================= CORPO ================= */
+const routines={
+ pmr:{t:'Rilassamento muscolare progressivo',s:[
+  ['Piedi','Arriccia le dita dei piedi, contrai… poi rilascia di colpo e senti il calore.',25],['Polpacci','Punta i piedi verso di te, tendi i polpacci… rilascia.',25],['Cosce','Premi le ginocchia una contro l\'altra, contrai le cosce… rilascia.',25],['Glutei','Stringi i glutei… rilascia, senti il bacino affondare.',25],['Pancia','Contrai l\'addome come per prepararti a un colpo… rilascia.',25],['Mani','Stringi i pugni… apri e lascia andare.',25],['Braccia','Piega i gomiti e contrai i bicipiti… rilascia.',25],['Spalle','Porta le spalle verso le orecchie… lasciale cadere.',25],['Collo','Spingi delicatamente la testa nel cuscino… rilascia.',25],['Viso','Strizza occhi, fronte e mascella… rilascia tutto. Lingua morbida.',25],['Tutto il corpo','Senti il corpo pesante e caldo. Respira lento e lascia andare.',60]]},
+ stretch:{t:'Stretching dolce della sera (≈10 min)',s:[
+  ['Respiro a pancia','Seduto o sdraiato, mani sulla pancia: 6 respiri lenti.',45],['Collo laterale','Orecchio verso la spalla destra, spalla opposta bassa. Respira.',30],['Collo laterale sinistro','Ora a sinistra.',30],['Gatto-mucca','A quattro zampe: inarca e arrotonda la schiena seguendo il respiro.',60],['Posizione del bambino','Glutei sui talloni, braccia avanti, fronte a terra. Respira nella schiena.',60],['Torsione supina','Sdraiato, ginocchia a destra, sguardo a sinistra.',45],['Torsione supina sinistra','Ginocchia a sinistra, sguardo a destra.',45],['Figura 4 (glutei)','Sdraiato, caviglia destra sul ginocchio sinistro, avvicina la gamba al petto.',40],['Figura 4 sinistra','Cambia lato.',40],['Ginocchia al petto','Abbraccia le ginocchia, dondola lentamente.',40],['Gambe al muro','Glutei vicino al muro, gambe in alto appoggiate. Rilassa tutto.',120],['Posizione del cadavere','Sdraiato, braccia lungo i fianchi, palmi in su. Lascia andare.',90]]}
+};
+const corpo=[
+{c:'Routine serali',e:'🌙',t:'Stretching dolce della sera',run:'stretch',b:`<p>12 posizioni a corpo libero, lente, da fare anche sul letto o su un tappetino. Nessuno sforzo: arriva al 50–60% dell'allungamento e respira.</p><ul><li>Respiro a pancia, allungamenti del collo, gatto-mucca</li><li>Posizione del bambino, torsioni supine</li><li>Figura 4 per i glutei, ginocchia al petto</li><li>Gambe al muro e rilassamento finale</li></ul>`},
+{c:'Routine serali',e:'💪',t:'Rilassamento muscolare progressivo',run:'pmr',b:`<p>Contrai e rilascia i gruppi muscolari dai piedi al viso. Si fa direttamente a letto, al buio. Circa 5 minuti.</p>`},
+{c:'Esercizi singoli',e:'🧱',t:'Gambe al muro (Viparita Karani)',b:`<p>Sdraiati con i glutei vicino al muro e le gambe appoggiate in verticale. Braccia aperte, palmi in su. 3–5 minuti di respiro lento. Favorisce il ritorno venoso e il rilassamento.</p><div class="note">Evitala in caso di glaucoma o problemi di pressione oculare.</div>`},
+{c:'Esercizi singoli',e:'🦋',t:'Farfalla sdraiata',b:`<p>Supino, piante dei piedi unite, ginocchia che cadono ai lati (puoi mettere cuscini sotto). Mani su pancia e petto. 2–3 minuti. Apre le anche e calma il respiro.</p>`},
+{c:'Esercizi singoli',e:'🐈',t:'Gatto-mucca',b:`<p>A quattro zampe: inspirando inarca la schiena e solleva lo sguardo, espirando arrotonda e porta il mento al petto. 8–10 ripetizioni lente. Scioglie la colonna dopo una giornata seduti.</p>`},
+{c:'Esercizi singoli',e:'🦶',t:'Automassaggio dei piedi',b:`<p>Con una pallina da tennis (o le mani) massaggia la pianta del piede 1–2 minuti per lato. Riduce la tensione e scalda le estremità: i piedi caldi favoriscono l'addormentamento.</p>`},
+{c:'Attività fisica',e:'🏃',t:'Quanto e quando muoversi',b:`<ul><li>L'attività fisica regolare è uno dei rimedi naturali più efficaci: migliora sonno profondo, tempo di addormentamento e umore.</li><li>Obiettivo: 150 minuti/settimana di attività moderata (camminata veloce, bici, nuoto) + 2 sedute di forza.</li><li><b>Meglio al mattino o nel pomeriggio</b>, all'aperto: unisci movimento e luce naturale.</li><li>Allenamenti intensi (HIIT, gare, pesi pesanti) chiudili <b>almeno 2–3 ore</b> prima di dormire: alzano temperatura, adrenalina e battito.</li><li>La sera va bene il movimento dolce: camminata, yoga, stretching, mobilità.</li></ul>`},
+{c:'Attività fisica',e:'🚶',t:'La camminata dopo cena',b:`<p>10–20 minuti di passeggiata tranquilla dopo cena aiutano digestione e glicemia e scaricano la tensione della giornata, senza attivare troppo. Senza telefono in mano, se puoi.</p>`},
+{c:'Attività fisica',e:'🌳',t:'Luce e movimento all\'aperto',b:`<p>Una camminata al mattino nel verde (o in un bosco vicino a casa) è doppiamente utile: la luce del giorno regola la melatonina e l'attività abbassa lo stress. Anche 20 minuti fanno differenza.</p>`},
+{c:'Attività fisica',e:'🧘',t:'Yoga, Tai Chi e Qi Gong',b:`<p>Le discipline lente che uniscono movimento, respiro e attenzione hanno mostrato benefici sulla qualità del sonno, soprattutto negli adulti e negli anziani. 2–3 sessioni a settimana, anche la sera.</p>`}
+];
+section('#corList','#corChips',corpo);
+// player routine
+let rt=null;
+document.addEventListener('click',e=>{const b=e.target.closest('[data-run]');if(!b)return;
+  const r=routines[b.dataset.run];if($('#v-tecniche').classList.contains('on'))go('corpo');startRoutine(r)});
+function startRoutine(r){ac();stopRoutine();rt={r,i:0,left:r.s[0][2],paused:false};$('#routineBox').classList.remove('hidden');$('#rtTitle').textContent=r.t;showRt();
+  rt.int=setInterval(()=>{if(rt.paused)return;rt.left--;if(rt.left<=0)nextRt();else $('#rtTime').textContent=rt.left},1000);window.scrollTo({top:0,behavior:'smooth'})}
+function showRt(){const s=rt.r.s[rt.i];$('#rtName').textContent=s[0];$('#rtDesc').textContent=s[1];$('#rtTime').textContent=rt.left;$('#rtStep').textContent=`${rt.i+1}/${rt.r.s.length}`;beep(330)}
+function nextRt(){rt.i++;if(rt.i>=rt.r.s.length){$('#rtName').textContent='Fatto. Buonanotte 🌙';$('#rtDesc').textContent='';$('#rtTime').textContent='✓';clearInterval(rt.int);return}rt.left=rt.r.s[rt.i][2];showRt()}
+function stopRoutine(){if(rt)clearInterval(rt.int);rt=null;$('#routineBox').classList.add('hidden')}
+$('#rtPause').onclick=()=>{if(!rt)return;rt.paused=!rt.paused;$('#rtPause').textContent=rt.paused?'Riprendi':'Pausa'};
+$('#rtSkip').onclick=()=>rt&&nextRt();$('#rtStop').onclick=stopRoutine;
+
+/* ================= ABITUDINI ================= */
+const abitudini=[
+{c:'Ritmo',e:'⏰',t:'Orari regolari',b:`<p>La regola più importante: <b>stessa ora di sveglia ogni giorno</b>, weekend compresi (al massimo un'ora di scarto). L'orario di andare a letto si regola da sé, in base al sonno.</p>`},
+{c:'Ritmo',e:'💤',t:'Pisolini',b:`<p>Se dormi male di notte, evitali. Se proprio servono: massimo 20 minuti, prima delle 15. Un pisolino lungo o tardivo "consuma" la pressione del sonno della sera.</p>`},
+{c:'Ritmo',e:'🕯️',t:'Rituale pre-sonno',b:`<p>Un'ora di "atterraggio" con gli stessi gesti ogni sera: luci basse, tisana, doccia tiepida, lettura su carta, stretching, respiro. Il cervello impara la sequenza e inizia a rilassarsi in anticipo.</p>`},
+{c:'Camera',e:'🌡️',t:'Temperatura',b:`<p>Camera fresca: circa 17–19 °C. Il corpo deve abbassare la temperatura interna per addormentarsi. Una doccia o un bagno tiepido 1–2 ore prima aiuta proprio perché, dopo, la temperatura scende. Piedi freddi? Calzini.</p>`},
+{c:'Camera',e:'🌑',t:'Buio',b:`<p>Anche poca luce riduce la melatonina. Tende oscuranti o mascherina; copri i led di caricatori e dispositivi. Per alzarti di notte usa luci basse e calde (rosse/arancioni). In questa app c'è il pulsante 🔴 per la luce rossa.</p>`},
+{c:'Camera',e:'🔇',t:'Silenzio',b:`<p>Tappi per le orecchie (in schiuma o silicone) o un rumore di fondo costante (rumore rosa/marrone nella sezione Suoni) per coprire rumori improvvisi.</p>`},
+{c:'Camera',e:'🛏️',t:'Letto e cuscino',b:`<p>Materasso e cuscino comodi, lenzuola traspiranti (cotone, lino). Un cuscino che sostiene il collo nella posizione in cui dormi di solito. La camera ordinata e senza lavoro a vista "parla" di riposo.</p>`},
+{c:'Luce e schermi',e:'☀️',t:'Luce di giorno',b:`<p>La luce naturale al mattino è il segnale più forte per l'orologio biologico: 15–30 minuti all'aperto entro un'ora dal risveglio. D'inverno è ancora più importante. Di giorno lavora vicino a una finestra.</p>`},
+{c:'Luce e schermi',e:'📱',t:'Schermi la sera',b:`<p>Più della luce blu conta il contenuto: social, notizie, email e giochi tengono il cervello attivo. Smetti 30–60 minuti prima, metti il telefono fuori dalla camera (o lontano dal letto) e usa una sveglia normale. Se devi usarlo, filtro notte e luminosità al minimo.</p>`},
+{c:'Sostanze',e:'☕',t:'Caffeina',b:`<p>Resta in circolo 6–8 ore e oltre. Ultimo caffè entro le 14 se hai problemi di sonno. Attenzione alle fonti nascoste: tè, cola, energy drink, cioccolato, alcuni farmaci per il mal di testa.</p>`},
+{c:'Sostanze',e:'🍷',t:'Alcol',b:`<p>Sembra aiutare ad addormentarsi, ma rende il sonno superficiale e frammentato nella seconda metà della notte, riduce il sonno REM e peggiora russamento e apnee. Se bevi, fallo a cena e con moderazione, non come "sonnifero".</p>`},
+{c:'Sostanze',e:'🚭',t:'Fumo',b:`<p>La nicotina è uno stimolante e l'astinenza notturna può causare risvegli. Evita di fumare nelle ore prima di dormire; smettere migliora il sonno nel medio periodo.</p>`},
+{c:'Sostanze',e:'💊',t:'Sonniferi e farmaci',b:`<p>Possono essere utili per brevi periodi su indicazione medica, ma non curano la causa e possono dare dipendenza e tolleranza. Non interromperli bruscamente senza parlarne con il medico. Alcuni farmaci (cortisonici, decongestionanti, alcuni antidepressivi) possono disturbare il sonno: chiedi al medico.</p>`},
+{c:'Situazioni speciali',e:'🔄',t:'Turni di lavoro',b:`<ul><li>Occhiali scuri tornando a casa dopo la notte.</li><li>Camera completamente buia e silenziosa per il sonno diurno.</li><li>Orari il più possibile regolari anche nei giorni liberi.</li><li>Un breve pisolino prima del turno di notte.</li></ul>`},
+{c:'Situazioni speciali',e:'✈️',t:'Jet lag e cambio ora',b:`<p>Adattati subito all'orario locale: luce al mattino se hai viaggiato verso est, luce la sera se verso ovest. Pasti agli orari locali. Nei giorni prima del cambio dell'ora sposta sveglia e cena di 15 minuti al giorno.</p>`},
+{c:'Situazioni speciali',e:'🌸',t:'Menopausa, gravidanza, età',b:`<p>Vampate, cambi ormonali e l'avanzare dell'età cambiano il sonno: diventa più leggero e il ritmo si anticipa. Camera fresca, abiti traspiranti, luce serale moderata. Parlane con il medico: esistono soluzioni specifiche.</p>`},
+{c:'Quando preoccuparsi',e:'🩺',t:'Segnali da portare al medico',b:`<ul><li>Insonnia almeno 3 notti a settimana da più di 3 mesi.</li><li>Russamento forte, pause del respiro notate da altri, risvegli con senso di soffocamento (possibili apnee notturne).</li><li>Formicolii o bisogno irrefrenabile di muovere le gambe la sera (sindrome delle gambe senza riposo).</li><li>Sonnolenza diurna forte, colpi di sonno alla guida.</li><li>Umore molto basso, ansia persistente.</li></ul><p>La terapia di prima scelta per l'insonnia cronica è la <b>CBT-I</b>, disponibile con psicologi esperti nel sonno, centri di medicina del sonno e anche in programmi digitali.</p>`}
+];
+section('#abiList','#abiChips',abitudini);
+
+/* ================= DIARIO ================= */
+$('#dDate').valueAsDate=new Date();
+function mins(t){const[h,m]=t.split(':').map(Number);return h*60+m}
+function renderDiary(){
+  const d=store.get('diary',[]).sort((a,b)=>b.date.localeCompare(a.date));const last=d.slice(0,7);
+  if(!last.length){$('#sSleep').textContent=$('#sEff').textContent=$('#sQual').textContent='–';$('#sAdvice').textContent='Aggiungi la tua prima notte.';$('#dList').innerHTML='';return}
+  const avg=k=>last.reduce((s,x)=>s+x[k],0)/last.length;
+  const sl=avg('sleep'),eff=avg('eff'),q=avg('q');
+  $('#sSleep').textContent=(sl/60).toFixed(1);$('#sEff').textContent=Math.round(eff)+'%';$('#sQual').textContent=q.toFixed(1);
+  $('#sAdvice').textContent=eff>=85?'Ottima efficienza: il tempo a letto corrisponde al sonno. Se ti senti ancora stanco, puoi anticipare l\'ora di andare a letto di 15 minuti.'
+    : eff>=75?'Efficienza discreta. Applica il controllo dello stimolo (alzati se non dormi) e mantieni la sveglia fissa.'
+    : `Passi molto tempo a letto da sveglio. La restrizione del sonno potrebbe aiutarti: una finestra di circa ${Math.max(5.5,Math.round(sl/30)/2)} ore (vedi Tecniche) — meglio se con il supporto del medico.`;
+  $('#dList').innerHTML=d.slice(0,14).map((x,i)=>`<div class="list-item"><span><b>${x.date.split('-').reverse().join('/')}</b> · ${x.bed}→${x.up} · dormito ${(x.sleep/60).toFixed(1)} h · eff. ${Math.round(x.eff)}% · ${'★'.repeat(x.q)}${x.note?`<br><small style="color:var(--mut)">${esc(x.note)}</small>`:''}</span><button data-d="${x.date}">✕</button></div>`).join('');
+  $$('[data-d]').forEach(b=>b.onclick=()=>{store.set('diary',store.get('diary',[]).filter(x=>x.date!==b.dataset.d));renderDiary()});
+}
+$('#dSave').onclick=()=>{
+  const bed=$('#dBed').value,up=$('#dUp').value;if(!bed||!up||!$('#dDate').value)return;
+  let inBed=mins(up)-mins(bed);if(inBed<=0)inBed+=1440;
+  const sleep=Math.max(0,inBed-(+$('#dLat').value||0)-(+$('#dWake').value||0));
+  const e={date:$('#dDate').value,bed,up,sleep,inBed,eff:inBed?sleep/inBed*100:0,q:+$('#dQual').value,note:$('#dNote').value.trim()};
+  const d=store.get('diary',[]).filter(x=>x.date!==e.date);d.push(e);store.set('diary',d);$('#dNote').value='';renderDiary();
+};
+renderDiary();
+
+/* ================= AVVIO ================= */
+const h=location.hash.slice(1);if(h&&$('#v-'+h))go(h);
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
